@@ -1,0 +1,1 @@
+faire un texte par défaut dans le cas où le texte est vide.

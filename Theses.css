@@ -1,0 +1,104 @@
+.coeur{
+    display:flex;
+    margin: 5%;
+}
+.gauche,.droite{
+    width:15%;
+    padding:5px;
+    background-color: #5FC2CD;
+    border-radius: 8px;
+}
+.gauche > div,.droite > div{
+    padding: 15px;
+    background-color: #4380D0;
+    border-radius: 8px;
+}
+ 
+.milieu{
+    width:70%;
+}
+a {
+    text-decoration: none;
+}
+.these-elem{
+    background-color: #41CC6B;
+    border-radius: 8px;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 20px;
+    color: white;
+    margin-bottom: 5%;
+    text-decoration: none;
+}
+.these-info{
+    display:flex;
+}
+.these-elem:hover {
+    background-color: #30974f;
+    text-decoration: none;
+}
+.these-elem:active {
+    background-color: #246f3b;
+    text-decoration: none;
+}
+p{
+    padding: 10px;
+}
+.auteur,.directeur,.universite,.date{
+    flex-direction: row;
+}
+h2{
+    size:20px;
+}
+.tete{
+    width:100%;
+    margin-top: 4%;
+    background-color: #5FC2CD;
+    padding: 5%;
+    padding-bottom: 2%;
+}
+.tete > form{
+    width:100%;
+}
+.tete > div {
+    margin-top: 2%;
+}
+.navbar{
+    width:90%;
+    height: 40px;
+    padding: 30px;
+}
+.sub {
+    background-color: #c1f9ff;
+    border: 0px;
+    border-radius: 10px;
+    padding: 9px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.radio {
+    display: none;
+    margin-top: 20px;
+    height: auto;
+    width: 80%;
+}
+.radio + label {
+    background-color: rgb(92, 255, 184);
+    border: 0px;
+    border-radius: 10px;
+    display: block;
+    padding: 9px;
+    margin-top: 20px;
+    height: auto;
+    text-align: center;
+}
+.radio:checked + label {
+    background-color: #028961;
+    border: 0px;
+    display: block;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 9px;
+    height: auto;
+    text-align: center;
+}

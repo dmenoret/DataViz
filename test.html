@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="Icon.png">
+        <style>
+            .tete{
+                width:70%;
+                margin:15%
+            }
+            .coeur{
+                display:flex;
+                margin: 5%;
+            }
+            .gauche,.droite{
+                width:10%;
+                padding:5px;
+                background-color: #5FC2CD;
+            }
+            .milieu{
+                width:70%;
+            }
+            .these-elem{
+                background-color: #41CC6B;
+                border-radius: 5px;
+                margin-left: 5%;
+                margin-right: 5%;
+                padding: 20px;
+                color: white;
+                margin-bottom: 5%;
+            }
+            .these-info{
+                display:flex;
+            }
+            p{
+                padding: 10px;
+            }
+            .auteur,.directeur,.universite,.date{
+                flex-direction: row;
+            }
+            h2{
+                size:20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="coeur">
+            <div class="gauche">
+                Gauche
+            </div>
+            <div class="milieu">
+                <div class="these-elem">
+                    <h2>Nom de la thèse</h2>
+                    <div class="these-info">
+                        <p class="auteur">Par mr Z</p>
+                        <p class="directeur">Sous la direction de mme E</p>
+                        <p class="universite">Université Gustave Eiffel</p>
+                    </div>
+                    <div class="these-info">
+                        <p class="date">Le 12/10/2023</p>
+                    </div>
+                </div>
+                <div class="these-elem">
+                    <h2>Nom de la thèse</h2>
+                    <div class="these-info">
+                        <p class="auteur">Par mr Z</p>
+                        <p class="directeur">Sous la directio de mme E</p>
+                        <p class="universite">Université Gustave Eiffel</p>
+                    </div>
+                    <div class="these-info">
+                        <p class="date">Le 12/10/2023</p>
+                    </div>
+                </div>
+            </div>
+            <div class="droite">
+                Droite
+            </div>
+        </div>
+    </body>
+</html>
