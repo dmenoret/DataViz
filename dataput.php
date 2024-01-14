@@ -3,11 +3,8 @@
     // Username => root
     // Password => empty
     
-    $db = new mysqli('localhost', 'root', '', 'dataviz');
-    if ($db->connect_error) {
-        echo 'bad co';
-        die("échec de la connexion à la base de données:".$conn->connect_error);
-    }
+    
+    include 'fonction.php';
    // echo 'connexion ok';
     
     // json file name
@@ -27,12 +24,12 @@
         
         if (isset($entry['these_sur_travaux'])) {
             if ($entry['these_sur_travaux'] == "non") {
-                $these_sur_travaux = false;
+                $these_sur_travaux = "false";
             } else {
-                $these_sur_travaux = true;
+                $these_sur_travaux = "true";
             }
         } else {
-            $these_sur_travaux = null;
+            $these_sur_travaux = "null";
         }
 
 
@@ -155,9 +152,9 @@
 
         if (isset($entry['accessible'])) {
             if ($entry['accessible'] == "non") {
-                $accessible = false;
+                $accessible = "false";
             } else {
-                $accessible = true;
+                $accessible = "true";
             }
         } else {
             $accessible = null;
@@ -197,21 +194,24 @@
             $resumeen = mysqli_real_escape_string($db, $entry['resumes']['en']);
         } else {
             $resumeen = null;
-        }/*
+        }
 
-     
+        /*
         if ($inc != 0) {
             $insert = $db->query("INSERT INTO these (theseSurTravaux, dateSoutenance, idpres, nnt, embargo, langue, codeEtab,en_ligne,idDiscipline,titrefr, titreen, resumefr, resumeen) VALUES('$these_sur_travaux', '$date_soutenance', '$idpres', '$nnt', '$embargo', '$langue', '$code_etab', '$accessible', '$idDiscipline', '$titrefr', '$titreen', '$resumefr', '$resumeen');");
-        }
-        $these = $db->query('SELECT idThese FROM these where dateSoutenance = "'. $date_soutenance.'" and idpres = '. $idpres . '');
-        //$these = $db->query("SELECT idThese FROM these where theseSurTravaux = $these_sur_travaux and dateSoutenance = $date_soutenance and idpres = $idpres and nnt = $nnt and embargo = $embargo and langue = $langue and codeEtab = $code_etab and en_ligne = $accessible and idDiscipline = $idDiscipline and titrefr = $titrefr and titreen = $titreen and resumefr = $resumefr and resumeen = $resumeen ");
-        echo 'SELECT idThese FROM these where dateSoutenance = "'. $date_soutenance.'" and idpres = '. $idpres . '';
+        }*/
+        $qthese = 'SELECT idThese FROM these where titrefr = "'.$titrefr.'" and titreen = "'.$titreen.'" and resumefr = "'.$resumefr.'" and resumeen = "'.$resumeen.'"';
+        $zthese = 'SELECT idThese FROM these where theseSurTravaux = '.$these_sur_travaux.' and dateSoutenance = '.$date_soutenance.' and idpres = '.$idpres.' and nnt = "'.$nnt.'" and langue = "'.$langue.'" and codeEtab = "'.$code_etab.'" and idDiscipline = '.$idDiscipline.' and titrefr = "'.$titrefr.'" and titreen = "'.$titreen.'" and resumefr = "'.$resumefr.'" and resumeen = "'.$resumeen.'"';
+        $these = $db->query($qthese);
+        echo $qthese;
+        echo "<br>";
+        echo $zthese;
         if ($these && $these->num_rows > 0) {
             $id = $these->fetch_assoc();
             $idThese = $id["idThese"];
         } else {
             $idThese = 0;
-        }*/
+        }
 
         if (isset($entry['directeurs_these'][0])) {
             $directeur_these = "";
@@ -237,9 +237,9 @@
                 }*/
                 $select = $db->query("SELECT idPeople from people where nom = '$nom' and prenom = '$prenom';");
                 if ($select && $select->num_rows > 0) {
-                    $dire = $select->fetch_assoc();
-                    $iddir = $dire["idPeople"];
-                    $insert = $db->query("INSERT into directeurs_theses (idThese, idPeople) VALUES ('$inc', '$iddir'); ");
+                    $dirs = $select->fetch_assoc();
+                    $iddir = $dirs["idPeople"];
+                    //$insert = $db->query("INSERT into directeurs_theses (idThese, idPeople) VALUES ('$inc', '$iddir'); ");
                 }
             }
         } else {
@@ -360,6 +360,12 @@
                     }
                 } else {
                     //echo "Erreur lors de la vérification de l'utilisateur : " . $db->error;
+                }
+                $select = $db->query("SELECT idPeople from people where nom = '$nom' and prenom = '$prenom';");
+                if ($select && $select->num_rows > 0) {
+                    $mem = $select->fetch_assoc();
+                    $iddir = $mem["idPeople"];
+                    $insert = $db->query("INSERT into membres_jury (idThese, idPeople) VALUES ('$inc', '$iddir'); ");
                 }*/
             }
         } else {
@@ -420,6 +426,14 @@
                 } else {
                     echo "Erreur lors de la vérification de l'utilisateur : " . $db->error;
                 }*/
+                $select = $db->query("SELECT idPeople from people where nom = '$nom' and prenom = '$prenom';");
+                if ($select && $select->num_rows > 0) {
+                    $rap = $select->fetch_assoc();
+                    $iddir = $rap["idPeople"];/*
+                    if (iddir > 0) {
+                        $insert = $db->query("INSERT into rapporteurs (idThese, idPeople) VALUES ('$inc', '$iddir'); ");
+                    }*/
+                }
             }
         } else {
             $rapporteurs = null;
@@ -452,13 +466,19 @@
                     }
                 } else {
                     echo "Erreur lors de la vérification de l'utilisateur : " . $db->error;
+                }
+                $select = $db->query("SELECT idPeople from people where nom = '$nom' and prenom = '$prenom';");
+                if ($select && $select->num_rows > 0) {
+                    $aut = $select->fetch_assoc();
+                    $iddir = $aut["idPeople"];
+                    $insert = $db->query("INSERT into auteurs (idThese, idPeople) VALUES ('$inc', '$iddir'); ");
                 }*/
             }
         } else {
             $auteurs = null;
         }
         // Utilisez les données extraites comme vous le souhaitez
-        echo "Thèse : $inc<br>";/*
+        echo "Thèse : $idThese<br>";/*
         echo "En travaux : $these_sur_travaux<br>";
         echo "Date de Soutenance : $date_soutenance<br>";
         echo "président jury : $idpres<br>";

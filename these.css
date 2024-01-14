@@ -25,7 +25,7 @@ body {
     padding: 5px;
     border-radius: 8px;
 }
-.author {
+.dir {
     background-color:rgb(19, 125, 88);
     margin-top: 15px;
     margin-left: 15px;
@@ -67,6 +67,9 @@ img{
     background-color: rgb(36, 235, 165);
     padding:23px;
 }
+.directeur, .author {
+    display: block;
+}
 .infos > div{
     font-family: Arial;
     padding: 12px;
@@ -79,4 +82,29 @@ img{
     border : 1px solid black;
     width: fit-content;
     margin: 5px;
+}
+.these-elem{
+    background-color: #75ff3e;
+    border-radius: 8px;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 20px;
+    color: white;
+    margin-bottom: 5%;
+    text-decoration: none;
+}
+.these-info{
+    display:flex;
+}
+.these-info >p{
+    padding : 15px;
+    min-width : 20%;
+}
+.these-elem:hover {
+    background-color: #30974f;
+    text-decoration: none;
+}
+.these-elem:active {
+    background-color: #246f3b;
+    text-decoration: none;
 }

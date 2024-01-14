@@ -15,11 +15,7 @@
 	</head>
 	<body>
         <?php
-            $db = new mysqli('localhost', 'root', '', 'dataviz');
-            if ($db->connect_error) {
-                echo 'bad co';
-                die("échec de la connexion à la base de données:".$conn->connect_error);
-            }
+            include 'fonction.php';
         ?>
     <table class="table">
   <thead>

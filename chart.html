@@ -1,0 +1,62 @@
+<html>
+    <head>
+      <link href="chart.css" rel="stylesheet">
+      <link rel="icon" type="image/x-icon" href="Icon.png">
+      <meta charset="UTF-8" />
+		  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    </head>
+    <body style="margin: 0;">
+        <div class="head">
+          <h1>NosThèses.edu</h1> 
+          <div>financé par <img src="ridf.png"></div>
+            <div>
+              <form>
+                <input type="text" placeholder="Recherchez une thèse">
+              </form>
+            </div>
+        </div>
+        <div class ="bottom">
+            <div>
+                <div> Répartition par sujets top 10 </div>
+                <div></div>
+                <div>nombre de thèses</div>
+            </div>
+            <div>
+                <div> Répartition par université</div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>
+                <div> Répartition par directeur de thèses</div>
+                <div></div>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>               
+            </div>
+        </div><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('myChart');
+            Chart.defaults.backgroundColor = '#0d18ea';
+            Chart.defaults.borderColor = '#0d18ea';
+            Chart.defaults.color = '#000';
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                  label: '# of Votes',
+                  data: [12, 19, 3, 5, 2, 3],
+                  borderWidth: 1,
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+        </script>          
+    </body>
+</html>

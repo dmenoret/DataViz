@@ -1,9 +1,5 @@
 <?php
-    $db = new mysqli('localhost', 'root', '', 'dataviz');
-    if ($db->connect_error) {
-        echo 'bad co';
-        die("échec de la connexion à la base de données:".$conn->connect_error);
-    }
+    include 'fonction.php';
     if (isset($_GET['idAuteur'])) {
         $recherche = $_GET['idAuteur'];
     } else {
@@ -20,7 +16,10 @@
     } else {
         echo "Nous n'avons pas de personne enregistrée sous ce numéro.";
     }
-    $result = $db->query("SELECT idThese from directeurs_theses where idPeople = $recherche");
+    $resultdir = $db->query("SELECT t.idThese as id, t.dateSoutenance as dateS, t.titrefr as titre FROM these t join directeurs_theses dt on t.idThese = dt.idThese WHERE dt.idPeople = $recherche");
+    $resultaut = $db->query("SELECT t.idThese as id, t.dateSoutenance as dateS, t.titrefr as titre FROM these t join auteurs a on t.idThese = a.idThese WHERE a.idPeople = $recherche");
+    $etabs = $db->query("SELECT e.codeEtab as code, e.nom as nom FROM etablissement e join these t on e.codeEtab = t.codeEtab join directeurs_theses dt on t.idThese = dt.idThese WHERE dt.idPeople = $recherche;");
+    $count = $db->query("SELECT count(*) as count FROM these t join directeurs_theses dt on t.idThese = dt.idThese WHERE dt.idPeople = $recherche");
 ?>
 <html lang="fr">
 <head>
@@ -37,7 +36,7 @@
     <div class="backgr">
         <div class ="a">
             <div class ="ab">
-                <a href="index.php"><img src="home.png" alt="homepage icon"></a>
+                <a href="recherche.php"><img src="home.png" alt="homepage icon"></a>
             </div>
         </div>
         <div class ="b"></div>
@@ -50,44 +49,54 @@
                     <div class ="author"><h1><?php
                     echo $nom.' '.$prenom;?></h1></div>
                 </div>
-                <div>Dernier article : ______________________</div>
-                <div>12 articles</div>
-                <div>3 thèses encadrés</div>
                 <div>
-                    <div class="univ">Orléans</div>
-                    <div class="univ">Dauphine</div>
-                    <div class="univ">Eiffel</div>
+                    <?php 
+                        if ($count && $count->num_rows > 0) {
+                            $row = $count->fetch_assoc();
+                            echo $row["count"];
+                        }
+                    ?> thèse(s) encadré(s)
                 </div>
-                <div class ="author"><h1>A dirigé ces thèses :</h1></div>
-                <d
+                <div class ="etablis">
+                    <?php
+                        if ($etabs && $etabs->num_rows > 0) {
+                            $etab = $etabs->fetch_assoc();
+                            while ($etab != null) {
+                                echo '<a style ="text-decoration:none; color:white;" href="uni.php?uni='.$etab['code'].'"><div class="univ">'.$etab["nom"]."</div></a>";
+                                $etab = $etabs->fetch_assoc();
+                            }
+                        }
+                    ?>
+                </div>
+                <div class ="dir">
+                    <h1>A écrit :</h1>
+                </div>
+                <div class = "author" style = "display:block;">
+                    <?php
+                        if ($resultaut && $resultaut->num_rows > 0) {
+                            $these = $resultaut->fetch_assoc();
+                            while ($these != null) {
+                                echo '<a style="text-decoration:none;" href="these.php?idThese='.$these["id"].'"><div class ="these-elem"><h2>'.$these["titre"].'</h2><div class="these-info">'.$these["dateS"]."</div></div></a>";
+                                $these = $resultaut->fetch_assoc();
+                            }
+                        }
+                    ?>
+                </div>
+                <div class ="dir">
+                    <h1>A dirigé :</h1>
+                </div>
+                <div class = "directeur" style = "display:block;">
+                    <?php
+                        if ($resultdir && $resultdir->num_rows > 0) {
+                            $these = $resultdir->fetch_assoc();
+                            while ($these != null) {
+                                echo '<a style="text-decoration:none;" href="these.php?idThese='.$these["id"].'"><div class ="these-elem"><h2>'.$these["titre"].'</h2><div class="these-info">'.$these["dateS"]."</div></div></a>";
+                                $these = $resultdir->fetch_assoc();
+                            }
+                        }
+                    ?>
+                </div>
             </div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
-            <div class="articles"></div>
             
         </div>
     </div>

@@ -29,11 +29,8 @@
                         $nom = htmlspecialchars($_POST['nom']);
                         $idref = htmlspecialchars($_POST['idref']);
                                 
-                        $db = new mysqli('localhost', 'root', '', 'dataviz');
-                        if ($db->connect_error) {
-                            echo 'bad co';
-                            die("échec de la connexion à la base de données:".$conn->connect_error);
-                        }
+                        
+                        include 'fonction.php';
                         
                         $result = $db->query("SELECT * FROM people where nom = '$nom' and idref = '$idref';");
                         if ($result && $result->num_rows > 0) {
