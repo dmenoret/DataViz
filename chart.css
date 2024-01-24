@@ -7,11 +7,13 @@
 }
 h1{
     color:white;
+    font-family: arial;
 }
 body{
     background-color:#341f97;
     padding:2px;
     margin:0;
+    font-family: arial;
 }
 .bottom {
     height: 70%;
@@ -42,6 +44,7 @@ h3{
     margin-bottom:0.5em;
     margin-left:5%;
     font-size: 13;
+    font-family: arial;
 }
 
 .head{
@@ -61,6 +64,7 @@ input[type=text]{
 .bottom > div > div > p{
     font-size: 30px;
     color: black;
+    font-family: arial;
 }
 
 a, a:visited{

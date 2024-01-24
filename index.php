@@ -28,8 +28,7 @@
     </head>
     <body>
         <div class="head">
-          <h1>NosThèses.edu</h1> 
-          <div>financé par <img src="ridf.png"></div>
+          <h1>NosThèses.edu</h1>
             <div>
               <form method="GET" action ="recherche.php">
                 <input type="text" placeholder="Recherchez une thèse" name="these">

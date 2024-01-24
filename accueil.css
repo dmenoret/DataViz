@@ -34,3 +34,6 @@ input[type=text]{
     flex-direction: row;
     padding: 25px;
 }
+body {
+    font-family: arial;
+}
